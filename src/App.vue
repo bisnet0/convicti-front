@@ -13,8 +13,7 @@ export default {
 </script>
 
 <style>
-/* Global Styles */
-/* #app {
+Global Styles #app {
   text-align: start;
   color: #2c3e50;
   background-color: #ffffff;
@@ -23,5 +22,5 @@ export default {
   align-items: flex-start;
   height: 100vh;
   margin: 0;
-} */
+}
 </style>
