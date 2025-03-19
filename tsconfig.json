@@ -1,4 +1,11 @@
 {
+  "compilerOptions": {
+    "module": "NodeNext",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
   "files": [],
   "references": [
     {
@@ -10,8 +17,5 @@
     {
       "path": "./tsconfig.vitest.json"
     }
-  ],
-  "compilerOptions": {
-    "module": "NodeNext"
-  }
+  ]
 }

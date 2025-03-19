@@ -1,25 +1,20 @@
 <template>
   <div id="app">
-    <!-- SignIn Component -->
-    <SignIn />
+    <!-- This is where the route will dynamically load the correct component -->
+    <router-view />
   </div>
 </template>
 
 <script>
-// Importing the SignIn component
-import SignIn from './views/SignIn.vue';
-
+// No need to import components here anymore, Vue Router will handle that
 export default {
   name: 'App',
-  components: {
-    SignIn,
-  },
 };
 </script>
 
 <style>
 /* Global Styles */
-#app {
+/* #app {
   text-align: start;
   color: #2c3e50;
   background-color: #ffffff;
@@ -28,5 +23,5 @@ export default {
   align-items: flex-start;
   height: 100vh;
   margin: 0;
-}
+} */
 </style>
