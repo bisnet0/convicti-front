@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import SignIn from '@/views/SignIn.vue';
-// import Dashboard from '@/views/Dashboard.vue';
+import Dashboard from '@/views/Dashboard.vue';
 // import AddUser from '@/views/AddUser.vue';
 // import AddProfile from '@/views/AddProfile.vue';
 // import Settings from '@/views/Settings.vue';
@@ -10,15 +10,16 @@ import type { RouteRecordRaw } from 'vue-router';
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/sign-in',
+    path: '/',
     name: 'SignIn',
     component: SignIn,
   },
-  // {
-  //   path: '/dashboard',
-  //   name: 'Dashboard',
-  //   component: Dashboard,
-  // },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard,
+
+  },
   // {
   //   path: '/add-user',
   //   name: 'AddUser',
