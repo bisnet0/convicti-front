@@ -1,14 +1,14 @@
 <template>
+    <div class="logo-container">
+        <div class="logo">
+            <img src="../assets/logo.svg" alt="Logo" />
+        </div>
+        <p class="convicti-title">
+            <span class="convic">CONVIC</span><span class="ti">TI</span>
+        </p>
+    </div>
     <div class="container">
         <!-- Logo and convicti-title text -->
-        <div class="logo-container">
-            <div class="logo">
-                <img src="../assets/logo.svg" alt="Logo" />
-            </div>
-            <p class="convicti-title">
-                <span class="convic">CONVIC</span><span class="ti">TI</span>
-            </p>
-        </div>
 
         <div class="signin">
             <!-- Title and Subtitle -->
@@ -29,10 +29,10 @@
             </form>
         </div>
 
-        <!-- Image Section -->
-        <div class="image-container">
-            <img src="../assets/dashboard.png" alt="SignIn Image" class="signin-image" />
-        </div>
+    </div>
+    <!-- Image Section -->
+    <div class="image-container">
+        <img src="../assets/dashboard.png" alt="SignIn Image" class="signin-image" />
     </div>
     <div class="ellipse-container">
         <EllipseCanvas />
@@ -63,11 +63,15 @@ export default {
 
 <style scoped>
 .container {
+    margin-left: 100px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    height: 100vh;
+    height: 50vh;
+    position: absolute;
+    left: 0;
 }
+
 
 .logo-container {
     display: flex;
@@ -89,7 +93,7 @@ export default {
     position: absolute;
     top: 86px;
     font-family: 'Nunito', sans-serif;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 20px;
     line-height: 100%;
     letter-spacing: 0;
@@ -112,6 +116,7 @@ export default {
     flex-direction: column;
     align-items: flex-start;
     margin-left: 50px;
+    height: calc(-200vh);
 }
 
 .text-container {
