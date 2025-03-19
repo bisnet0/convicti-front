@@ -3,7 +3,7 @@ import SignIn from '@/views/SignIn.vue';
 import Dashboard from '@/views/Dashboard.vue';
 // import AddUser from '@/views/AddUser.vue';
 // import AddProfile from '@/views/AddProfile.vue';
-// import Settings from '@/views/Settings.vue';
+import Settings from '@/views/Settings.vue';
 
 // Type import for RouteRecordRaw
 import type { RouteRecordRaw } from 'vue-router';
@@ -30,11 +30,11 @@ const routes: Array<RouteRecordRaw> = [
   //   name: 'AddProfile',
   //   component: AddProfile,
   // },
-  // {
-  //   path: '/settings',
-  //   name: 'Settings',
-  //   component: Settings,
-  // },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: Settings,
+  },
 ];
 
 // Create the router instance
