@@ -1,8 +1,7 @@
 <template>
     <div class="features-card">
-        <h3>Novas Funcionalidades</h3>
-        <!-- Tabela -->
-        <table class="features-table">
+        <h2>Novas Funcionalidades</h2>
+        <table class="styled-table" v-if="!loading && features.length > 0">
             <thead>
                 <tr>
                     <th>Funcionalidade</th>
@@ -20,6 +19,8 @@
                 </tr>
             </tbody>
         </table>
+        <p v-if="loading">Carregando...</p>
+        <p v-if="!loading && features.length === 0">Nenhuma funcionalidade disponível.</p>
     </div>
 </template>
 
@@ -71,35 +72,60 @@ export default defineComponent({
 
 <style scoped>
 .features-card {
-    width: 1000px;
-    background: white;
+    background-color: rgb(255, 255, 255);
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 16px;
-    margin: 20px auto;
-    text-align: left;
+    padding: 20px;
+    margin-top: 20px;
 }
 
-.features-table {
-    width: 100%;
+.styled-table {
     border-collapse: collapse;
-    margin-top: 16px;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 1);
+    width: 100%;
 }
 
-.features-table th {
-    background-color: #f4f4f4;
-    padding: 8px;
+.styled-table thead tr {
+    color: var(--secondary-color);
     text-align: left;
-    font-weight: bold;
-    border-bottom: 2px solid #ddd;
 }
 
-.features-table td {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
 }
 
-.features-table .usage {
+.styled-table tbody td:first-child {
+    border-bottom-left-radius: 8px;
+}
+
+.styled-table tbody td {
+    background-color: var(--terciary-color);
+}
+
+.styled-table tbody td:last-child {
+    border-bottom-right-radius: 8px;
+
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: var(--quaternary-color);
+}
+
+.styled-table tbody tr.active-row {
     font-weight: bold;
+    color: var(--primary-color);
+}
+
+.usage {
+    font-size: 20px;
+    font-weight: normal;
+    font-family: 'Nunito', sans-serif;
+    margin-left: auto;
+    text-align: right;
 }
 </style>
