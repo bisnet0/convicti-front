@@ -4,9 +4,17 @@ import Dashboard from '@/views/Dashboard.vue';
 // import AddUser from '@/views/AddUser.vue';
 // import AddProfile from '@/views/AddProfile.vue';
 import Settings from '@/views/Settings.vue';
-
-// Type import for RouteRecordRaw
 import type { RouteRecordRaw } from 'vue-router';
+
+// Middleware de autenticação
+function authGuard(to: any, from: any, next: any): void {
+  const token = localStorage.getItem('access_token');
+  if (!token) {
+    next({ path: '/' }); // Redireciona para a página de login
+  } else {
+    next(); // Permite o acesso à rota
+  }
+}
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -18,26 +26,29 @@ const routes: Array<RouteRecordRaw> = [
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
-
+    beforeEnter: authGuard, // Protege a rota com o middleware
   },
   // {
   //   path: '/add-user',
   //   name: 'AddUser',
   //   component: AddUser,
+  //   beforeEnter: authGuard, // Exemplo de proteção para futuras rotas
   // },
   // {
   //   path: '/add-profile',
   //   name: 'AddProfile',
   //   component: AddProfile,
+  //   beforeEnter: authGuard,
   // },
   {
     path: '/settings',
     name: 'Settings',
     component: Settings,
+    beforeEnter: authGuard, // Protege a rota de configurações
   },
 ];
 
-// Create the router instance
+// Criação da instância do router
 const router = createRouter({
   history: createWebHistory(),
   routes,
