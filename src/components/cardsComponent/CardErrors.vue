@@ -16,7 +16,22 @@
             </svg>
         </div>
         <!-- Destaque com o total de erros -->
-        <p class="value">{{ totalErrors }}</p>
+        <p class="value">{{ totalErrors }} <span class="usage" :style="{ color: 'rgba(0, 236, 109, 1)' }">
+                -5%<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_203_150)">
+                        <path
+                            d="M9.02496 8.895C8.97848 8.84814 8.92318 8.81094 8.86225 8.78555C8.80132 8.76017 8.73596 8.7471 8.66996 8.7471C8.60395 8.7471 8.5386 8.76017 8.47767 8.78555C8.41674 8.81094 8.36144 8.84814 8.31496 8.895L6.49996 10.71V0.5C6.49996 0.367392 6.44728 0.240215 6.35351 0.146447C6.25974 0.0526784 6.13257 0 5.99996 0C5.86735 0 5.74017 0.0526784 5.6464 0.146447C5.55264 0.240215 5.49996 0.367392 5.49996 0.5V10.705L3.68996 8.895C3.6471 8.8364 3.592 8.78784 3.52848 8.75269C3.46496 8.71754 3.39455 8.69664 3.32214 8.69145C3.24973 8.68625 3.17706 8.69689 3.10917 8.72262C3.04129 8.74835 2.97982 8.78855 2.92904 8.84044C2.87826 8.89232 2.83939 8.95464 2.81513 9.02306C2.79087 9.09148 2.78179 9.16436 2.78854 9.23664C2.79529 9.30893 2.8177 9.37887 2.85421 9.44162C2.89072 9.50437 2.94045 9.55841 2.99996 9.6L4.95996 11.56C5.24121 11.8409 5.62246 11.9987 6.01996 11.9987C6.41746 11.9987 6.79871 11.8409 7.07996 11.56L9.03996 9.6C9.13112 9.50435 9.18071 9.37651 9.1779 9.24441C9.17509 9.1123 9.1201 8.98668 9.02496 8.895Z"
+                            fill="#00EC6D" />
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_203_150">
+                            <rect width="12" height="12" fill="white" />
+                        </clipPath>
+                    </defs>
+                </svg>
+
+            </span></p>
+
         <!-- Detalhes por plataforma -->
         <div class="details">
             <span> <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -132,7 +147,7 @@ export default defineComponent({
     width: 100%;
     background: white;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
     padding: 16px;
     display: flex;
     flex-direction: column;
@@ -157,11 +172,22 @@ export default defineComponent({
     color: rgba(48, 48, 48, 0.349)
 }
 
+.usage {
+    font-size: 20px;
+    font-weight: normal;
+    font-family: 'Nunito', sans-serif;
+    margin-left: auto;
+    text-align: right;
+}
+
 .value {
     font-size: 40px;
     font-weight: bold;
     font-family: 'Nunito', sans-serif;
     color: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .details {
