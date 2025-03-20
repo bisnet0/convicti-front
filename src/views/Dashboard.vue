@@ -6,18 +6,29 @@
         <!-- Conteúdo principal da Dashboard -->
         <div class="main-content flex-1 p-6">
             <h1 class="stats-title">Estatísticas</h1>
+
             <!-- Estatísticas lado a lado -->
             <div class="card-container">
-                <CardDownloads />
-                <CardRates />
-                <CardErrors />
+                <RoleWrapper :permissions="['Downloads']" :userPermissions="userPermissions">
+                    <CardDownloads />
+                </RoleWrapper>
+                <RoleWrapper :permissions="['Avaliações']" :userPermissions="userPermissions">
+                    <CardRates />
+                </RoleWrapper>
+                <RoleWrapper :permissions="['Erros']" :userPermissions="userPermissions">
+                    <CardErrors />
+                </RoleWrapper>
             </div>
 
             <!-- Feedbacks -->
-            <CardFeedbacks />
+            <RoleWrapper :permissions="['Feedbacks']" :userPermissions="userPermissions">
+                <CardFeedbacks />
+            </RoleWrapper>
 
             <!-- Novas Funcionalidades -->
-            <CardNewFeatures />
+            <RoleWrapper :permissions="['Novas Funcionalidades']" :userPermissions="userPermissions">
+                <CardNewFeatures />
+            </RoleWrapper>
         </div>
     </div>
 </template>
@@ -29,6 +40,8 @@ import CardRates from '../components/cardsComponent/CardRates.vue';
 import CardErrors from '../components/cardsComponent/CardErrors.vue';
 import CardFeedbacks from '../components/cardsComponent/CardFeedbacks.vue';
 import CardNewFeatures from '../components/cardsComponent/CardNewFeatures.vue';
+import RoleWrapper from '../components/utilities/RoleWrapper.vue';
+import apiClient from '../api';
 
 export default {
     components: {
@@ -38,6 +51,20 @@ export default {
         CardErrors,
         CardFeedbacks,
         CardNewFeatures,
+        RoleWrapper,
+    },
+    data() {
+        return {
+            userPermissions: [], // Armazena as permissões do usuário
+        };
+    },
+    async mounted() {
+        try {
+            const response = await apiClient.get('/api/v1/me');
+            this.userPermissions = response.data.data.user.profile.permissions.map(permission => permission.name);
+        } catch (error) {
+            console.error('Erro ao buscar permissões:', error);
+        }
     },
 };
 </script>
@@ -59,7 +86,19 @@ export default {
 
 .card-container {
     display: flex;
+    width: 100%;
     gap: 20px;
     margin-bottom: 20px;
+    justify-content: space-between;
+    /* Distributes cards evenly with space between */
+    flex-wrap: wrap;
+    /* Allows wrapping if there are too many cards */
+}
+
+.card-container>* {
+    flex: 1;
+    /* Makes cards take up equal space */
+    min-width: 200px;
+    /* Ensures cards don't shrink too much */
 }
 </style>
