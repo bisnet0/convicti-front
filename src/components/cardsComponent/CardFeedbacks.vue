@@ -1,27 +1,29 @@
 <template>
     <div>
-        <h3>Feedbacks</h3>
-        <table class="styled-table" v-if="!loading && feedbacks.length > 0">
-            <thead>
-                <tr>
-                    <th>Avaliação</th>
-                    <th>Data</th>
-                    <th>Avaliação</th>
-                    <th>Melhorias</th>
-                    <th>Plataforma</th>
+        <div class="features-card">
+            <h2>Feedbacks</h2>
+            <table class="styled-table" v-if="!loading && feedbacks.length > 0">
+                <thead>
+                    <tr>
+                        <th>Avaliação</th>
+                        <th>Data</th>
+                        <th>Avaliação</th>
+                        <th>Melhorias</th>
+                        <th>Plataforma</th>
 
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="feedback in feedbacks" :key="feedback.id">
-                    <td>{{ feedback.description }}</td>
-                    <td>{{ formatDate(feedback.created_at) }}</td>
-                    <td>{{ feedback.evaluation }}</td>
-                    <td>{{ feedback.improvements }}</td>
-                    <td>{{ feedback.platform }}</td>
-                </tr>
-            </tbody>
-        </table>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="feedback in feedbacks" :key="feedback.id">
+                        <td>{{ feedback.description }}</td>
+                        <td>{{ formatDate(feedback.created_at) }}</td>
+                        <td>{{ feedback.evaluation }}</td>
+                        <td>{{ feedback.improvements }}</td>
+                        <td>{{ feedback.platform }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>
 
@@ -80,6 +82,12 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.features-card {
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    padding: 20px;
+}
+
 .styled-table {
     border-collapse: collapse;
     margin: 25px 0;
@@ -88,7 +96,6 @@ export default defineComponent({
     min-width: 400px;
     border-radius: 8px;
     background-color: rgba(255, 255, 255, 1);
-    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 }
 
 .styled-table thead tr {
@@ -96,14 +103,12 @@ export default defineComponent({
     text-align: left;
 }
 
-
 .styled-table th,
 .styled-table td {
     padding: 12px 15px;
 }
 
 .styled-table tbody td:first-child {
-    border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
 }
 
@@ -112,12 +117,12 @@ export default defineComponent({
 }
 
 .styled-table tbody td:last-child {
-    border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
+
 }
 
 .styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
+    background-color: var(--quaternary-color);
 }
 
 .styled-table tbody tr.active-row {
