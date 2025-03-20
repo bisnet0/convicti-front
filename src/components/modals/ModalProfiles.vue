@@ -7,8 +7,9 @@
             <div class="permissions">
                 <div v-for="permission in permissions" :key="permission.id" class="permission-item">
                     <span>{{ permission.name }}</span>
-                    <input type="checkbox" v-model="permission.enabled" />
+                    <ToggleSwitch v-model="permission.enabled" />
                 </div>
+
             </div>
             <div class="modal-buttons">
                 <button class="btn voltar" @click="closeModal">Voltar</button>
@@ -30,9 +31,12 @@ interface Profile {
     permissions: number[];
 }
 import apiClient from '../../api';
+import ToggleSwitch from '../ToggleSwitch.vue';
 
 export default defineComponent({
-
+    components: {
+        ToggleSwitch,
+    },
     props: {
         profile: {
             type: Object as () => Profile | null,
