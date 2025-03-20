@@ -1,8 +1,7 @@
 <template>
-    <div class="feedback-card">
+    <div>
         <h3>Feedbacks</h3>
-        <!-- Tabela -->
-        <table class="feedback-table">
+        <table class="styled-table" v-if="!loading && feedbacks.length > 0">
             <thead>
                 <tr>
                     <th>Avaliação</th>
@@ -10,6 +9,7 @@
                     <th>Avaliação</th>
                     <th>Melhorias</th>
                     <th>Plataforma</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -27,9 +27,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import apiClient from '../../api'; // Ajuste o caminho, se necessário
+import apiClient from '../../api'; // Adjust the path if needed
 
-// Tipo para um item de feedback
 interface FeedbackItem {
     id: number;
     device_id: number;
@@ -41,7 +40,6 @@ interface FeedbackItem {
     platform: string;
 }
 
-// Tipo para a resposta da API
 interface ApiResponse {
     data: {
         current_page: number;
@@ -54,23 +52,20 @@ interface ApiResponse {
 export default defineComponent({
     data() {
         return {
-            feedbacks: [] as FeedbackItem[], // Armazenar os dois primeiros feedbacks
-            loading: true, // Estado de carregamento
+            feedbacks: [] as FeedbackItem[],
+            loading: true,
         };
     },
     async mounted() {
         try {
-            // Chamar a API e carregar os feedbacks
             const response: { data: ApiResponse } = await apiClient.get<ApiResponse>('/api/v1/evaluations?page=1');
-            // Acessar corretamente o array de dados e pegar os dois primeiros itens
-            this.feedbacks = response.data.data.data.slice(0, 1);
+            this.feedbacks = response.data.data.data.slice(0, 2); // Get the first two feedbacks
             this.loading = false;
         } catch (error) {
-            console.error('Erro ao carregar os feedbacks:', error);
+            console.error('Error loading feedbacks:', error);
             this.loading = false;
         }
     },
-
     methods: {
         formatDate(date: string): string {
             const options: Intl.DateTimeFormatOptions = {
@@ -85,36 +80,48 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.feedback-card {
-    width: 1000px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 16px;
-    margin: 20px auto;
-    text-align: left;
-}
-
-.feedback-table {
-    width: 100%;
+.styled-table {
     border-collapse: collapse;
-    margin-top: 16px;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 1);
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 }
 
-.feedback-table th {
-    background-color: #f4f4f4;
-    padding: 8px;
+.styled-table thead tr {
+    color: var(--secondary-color);
     text-align: left;
+}
+
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody td:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.styled-table tbody td {
+    background-color: var(--terciary-color);
+}
+
+.styled-table tbody td:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr.active-row {
     font-weight: bold;
-    border-bottom: 2px solid #ddd;
-}
-
-.feedback-table td {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
-}
-
-.feedback-table tr:last-child td {
-    border-bottom: none;
+    color: var(--primary-color);
 }
 </style>
