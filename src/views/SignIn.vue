@@ -25,7 +25,7 @@
                 <div class="input-group">
                     <input type="password" v-model="password" placeholder="Sua senha" class="input-field" required />
                 </div>
-                <button type="submit" class="signin-button">Enter</button>
+                <button type="submit" class="signin-button">Entrar</button>
             </form>
         </div>
 
@@ -41,6 +41,8 @@
 
 <script>
 import EllipseCanvas from '../components/EllipseCanvas.vue';
+import apiClient from '../api'; // 🔹 Adicione esta linha
+
 export default {
     components: {
         EllipseCanvas,
@@ -53,13 +55,28 @@ export default {
         };
     },
     methods: {
-        handleSignIn() {
-            console.log('Sign In submitted with:', this.email, this.password);
-            // Add your sign-in logic here
-        },
-    },
+        async handleSignIn() {
+            try {
+                const response = await apiClient.post('/oauth/token', {
+                    grant_type: 'password',
+                    client_id: import.meta.env.VITE_APP_CLIENT_ID,
+                    client_secret: import.meta.env.VITE_APP_CLIENT_SECRET,
+                    username: this.email,
+                    password: this.password,
+
+                });
+
+                localStorage.setItem('access_token', response.data.access_token); // Salva o token
+                this.$router.push('/dashboard'); // Redireciona o usuário
+            } catch (error) {
+                console.error('Erro ao fazer login:', error);
+                alert('Erro ao autenticar. Verifique suas credenciais.');
+            }
+        }
+    }
 };
 </script>
+
 
 <style scoped>
 .container {
