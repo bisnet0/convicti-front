@@ -1,10 +1,11 @@
 /* Base styles for the application */
 
 :root {
-  --primary-color: #3498db;
-  --secondary-color: #2ecc71;
+  --primary-color: #e6e9eb;
+  --secondary-color: rgb(183, 183, 183);
+  --terciary-color: rgba(183, 183, 183, 0.075);
   --text-color: #333;
-  --background-color: #ffffff;
+  --background-color: rgba(248, 248, 248, 1);
   --font-family: 'Nunito', sans-serif;
 }
 
