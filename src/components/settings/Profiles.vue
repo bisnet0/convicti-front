@@ -1,25 +1,20 @@
 <template>
     <div class="profiles-card">
         <div>
-            <h3>Perfis
-                <!-- Botão de adicionar perfil -->
-                <button class="add-profile-button" @click="openAddModal">
-                    +
-                </button>
-            </h3>
+            <h2>
+                Perfis
+                <button class="add-profile-button" @click="openAddModal">+</button>
+            </h2>
 
-            <!-- Modal de criação/edição de perfil -->
             <ModalProfiles v-show="showModal" @close="closeModal" :profile="selectedProfile" />
         </div>
 
-        <!-- Tabela -->
-        <table class="profiles-table">
+        <table class="styled-table" v-if="!loading && profiles.length > 0">
             <thead>
                 <tr>
                     <th>Nome</th>
                     <th>Quantidade De Usuários</th>
                     <th>Permissões</th>
-                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,7 +22,6 @@
                     <td>{{ profile.name }}</td>
                     <td>{{ profile.total_users }}</td>
                     <td>
-                        <!-- Exibir "Tudo", "Nenhuma" ou as permissões estilizadas -->
                         <template v-if="profile.permissions.length === 0">
                             <span class="permission">Nenhuma</span>
                         </template>
@@ -144,6 +138,77 @@ export default defineComponent({
 </script>
 
 <style scoped>
+/* Use the same scoped CSS styles, with styled-table overriding profiles-table */
+.features-card {
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 1);
+    width: 100%;
+}
+
+
+.styled-table thead tr {
+    color: var(--secondary-color);
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+table tr:first-child td:last-child {
+    border-top-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+
+
+.styled-table tbody td {
+    background-color: var(--terciary-color);
+}
+
+table tr:first-child td:first-child {
+    border-top-left-radius: 10px;
+}
+
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: var(--quaternary-color);
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.usage {
+    font-size: 20px;
+    font-weight: normal;
+    font-family: 'Nunito', sans-serif;
+    margin-left: auto;
+    text-align: right;
+}
+
 .add-profile-button {
     display: inline-block;
     width: 24px;
@@ -180,7 +245,7 @@ export default defineComponent({
 }
 
 
-.profiles-card h3 {
+.profiles-card h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
