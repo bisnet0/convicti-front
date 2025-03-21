@@ -83,6 +83,9 @@ export default defineComponent({
                         permissions: selectedPermissions,
                     });
                     console.log('Perfil atualizado com sucesso');
+
+                    // Recarregar a página
+                    window.location.reload();
                 } else {
                     // Criar novo perfil
                     await apiClient.post('/api/v1/profiles', {
@@ -90,7 +93,11 @@ export default defineComponent({
                         permissions: selectedPermissions,
                     });
                     console.log('Perfil criado com sucesso');
+
+                    // Recarregar a página
+                    window.location.reload();
                 }
+
                 closeModal(); // Fecha o modal após salvar
             } catch (error) {
                 console.error('Erro ao salvar o perfil:', error);
