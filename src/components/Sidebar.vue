@@ -58,7 +58,7 @@
                 </svg>
                 Configurações
             </router-link>
-            <router-link to="/quit" class="link-item">
+            <a href="#" @click="logout" class="link-item">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_204_87)">
                         <path
@@ -75,7 +75,8 @@
                     </defs>
                 </svg>
                 Sair
-            </router-link>
+            </a>
+
         </div>
     </div>
 </template>
@@ -83,6 +84,12 @@
 <script>
 export default {
     name: 'Sidebar',
+    methods: {
+        logout() {
+            localStorage.removeItem('access_token'); // Remove o token
+            location.reload(); // Atualiza a página
+        }
+    }
 };
 </script>
 
