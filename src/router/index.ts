@@ -28,18 +28,6 @@ const routes: Array<RouteRecordRaw> = [
     component: Dashboard,
     beforeEnter: authGuard, // Protege a rota com o middleware
   },
-  // {
-  //   path: '/add-user',
-  //   name: 'AddUser',
-  //   component: AddUser,
-  //   beforeEnter: authGuard, // Exemplo de proteção para futuras rotas
-  // },
-  // {
-  //   path: '/add-profile',
-  //   name: 'AddProfile',
-  //   component: AddProfile,
-  //   beforeEnter: authGuard,
-  // },
   {
     path: '/settings',
     name: 'Settings',
