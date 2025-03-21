@@ -45,6 +45,7 @@ export default {
 .stats-title {
     font-weight: bold;
     margin-bottom: 20px;
+    margin-left: 100px;
 }
 
 .card-container {
