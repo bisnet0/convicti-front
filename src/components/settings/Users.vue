@@ -1,26 +1,22 @@
 <template>
     <div class="users-card">
         <div>
-            <h3>Usuários
-                <!-- Botão de adicionar usuário -->
-                <button class="add-user-button" @click="openAddModal">
-                    +
-                </button>
-            </h3>
+            <h2>
+                Usuários
+                <button class="add-user-button" @click="openAddModal">+</button>
+            </h2>
 
             <!-- Modal de criação/edição de usuário -->
             <ModalUsers v-show="showModal" @close="closeModal" :user="selectedUser" />
         </div>
 
-        <!-- Tabela -->
-        <table class="users-table">
+        <table class="styled-table" v-if="!loading && users.length > 0">
             <thead>
                 <tr>
                     <th>Nome</th>
                     <th>Email</th>
                     <th>Perfil</th>
                     <th>Status</th>
-                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,6 +52,8 @@
                 </tr>
             </tbody>
         </table>
+        <p v-if="loading">Carregando...</p>
+        <p v-if="!loading && users.length === 0">Nenhum usuário disponível.</p>
     </div>
 </template>
 
@@ -89,15 +87,14 @@ export default defineComponent({
     },
     data() {
         return {
-            users: [] as User[], // Lista de usuários
-            showModal: false, // Controle de exibição do modal
-            selectedUser: null as User | null, // Usuário selecionado para edição
-            loading: true, // Estado de carregamento
+            users: [] as User[],
+            showModal: false,
+            selectedUser: null as User | null,
+            loading: true,
         };
     },
     async mounted() {
         try {
-            // Requisição para carregar usuários
             const response: { data: ApiResponse } = await apiClient.get<ApiResponse>('/api/v1/users');
             this.users = response.data.data;
             this.loading = false;
@@ -108,17 +105,14 @@ export default defineComponent({
     },
     methods: {
         openAddModal() {
-            // Limpa o usuário selecionado e abre o modal
             this.selectedUser = null;
             this.showModal = true;
         },
         openEditModal(user: User) {
-            // Define o usuário selecionado e abre o modal
-            this.selectedUser = { ...user }; // Clona os dados do usuário
+            this.selectedUser = { ...user };
             this.showModal = true;
         },
         closeModal() {
-            // Fecha o modal e reseta o usuário selecionado
             this.showModal = false;
             this.selectedUser = null;
         },
@@ -127,21 +121,77 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.users-card {
-    width: 933px;
-    background: white;
+/* Use the same scoped CSS styles, with styled-table overriding profiles-table */
+.features-card {
+    background-color: rgb(255, 255, 255);
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 16px;
-    margin: 20px auto;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 1);
+    width: 100%;
+}
+
+
+.styled-table thead tr {
+    color: var(--secondary-color);
     text-align: left;
 }
 
-.users-card h3 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
 }
+
+table tr:first-child td:last-child {
+    border-top-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+
+
+.styled-table tbody td {
+    background-color: var(--terciary-color);
+}
+
+table tr:first-child td:first-child {
+    border-top-left-radius: 10px;
+}
+
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: var(--quaternary-color);
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.usage {
+    font-size: 20px;
+    font-weight: normal;
+    font-family: 'Nunito', sans-serif;
+    margin-left: auto;
+    text-align: right;
+}
+
 
 .add-user-button {
     display: inline-block;
@@ -157,10 +207,6 @@ export default defineComponent({
     border: none;
     cursor: pointer;
     margin-left: auto;
-}
-
-.add-user-button:hover {
-    background-color: rgba(84, 82, 252, 0.8);
 }
 
 .edit-profile-button {
@@ -182,40 +228,33 @@ export default defineComponent({
     opacity: 0.8;
 }
 
-.users-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 16px;
+
+.users-card h2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.users-table th {
-    background-color: #f4f4f4;
-    padding: 8px;
+.add-user-button:hover {
+    background-color: rgba(84, 82, 252, 0.8);
+}
+
+.users-card {
+    width: 933px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    margin: 20px auto;
     text-align: left;
-    font-weight: bold;
-    border-bottom: 2px solid #ddd;
 }
 
-.users-table td {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
-}
 
-.status-active {
-    background-color: rgba(204, 255, 227, 1);
-    border-radius: 4px;
-    padding: 4px 8px;
-    width: 84px;
+.permission {
+    background-color: rgba(91, 89, 255, 0.2);
+    border-radius: 17px;
+    padding: 5px 10px;
+    margin-right: 5px;
     display: inline-block;
-    text-align: center;
-}
-
-.status-inactive {
-    background-color: rgba(230, 97, 87, 1);
-    border-radius: 4px;
-    padding: 4px 8px;
-    width: 84px;
-    display: inline-block;
-    text-align: center;
 }
 </style>
