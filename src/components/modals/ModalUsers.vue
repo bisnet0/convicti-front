@@ -121,6 +121,9 @@ export default defineComponent({
                         email: userEmail.value.trim(), // E-mail atualizado
                     });
                     console.log('Usuário atualizado com sucesso.');
+
+                    // Recarregar a página
+                    window.location.reload();
                 } else {
                     // Criar novo usuário
                     await apiClient.post('/api/v1/users', {
@@ -129,7 +132,11 @@ export default defineComponent({
                         email: userEmail.value.trim(),
                     });
                     console.log('Usuário criado com sucesso.');
+
+                    // Recarregar a página
+                    window.location.reload();
                 }
+
                 closeModal();
             } catch (error) {
                 console.error('Erro ao salvar o usuário:', error);
