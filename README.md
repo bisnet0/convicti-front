@@ -16,6 +16,37 @@
 ```
 ---
 
+Certifique-se de desabilitar o CORS para o Laravel 11:
+`php artisan config:publish cors` vai gerar um arquivo `cors.php ` e em seguida adicione `'*'` no fnal de paths
+
+```php
+<?php
+
+return [
+
+    /*
+  ADICIONE O ASTERISCO DENTRO DA ASPAS SIMPLES NO FINAL DE PATHS PARA PERMITIR AS REQUISIÇÕES
+    */
+
+    'paths' => ['api/*', 'sanctum/csrf-cookie', '*'],
+
+    'allowed_methods' => ['*'],
+
+    'allowed_origins' => ['*'],
+
+    'allowed_origins_patterns' => [],
+
+    'allowed_headers' => ['*'],
+
+    'exposed_headers' => [],
+
+    'max_age' => 0,
+
+    'supports_credentials' => false,
+
+];
+```
+
 ### 📦 Instalando as dependências
 
 Execute o seguinte comando para instalar todas as dependências do projeto:
@@ -69,3 +100,4 @@ Agora, o projeto estará pronto para ser acessado! 🎉
 ---
 
 ✅ **Tudo pronto!** Se precisar de ajuda, sinta-se à vontade para entrar em contato. 🚀
+
