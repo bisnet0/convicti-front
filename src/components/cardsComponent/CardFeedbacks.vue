@@ -108,18 +108,28 @@ export default defineComponent({
     padding: 12px 15px;
 }
 
-.styled-table tbody td:first-child {
-    border-bottom-left-radius: 8px;
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
 }
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+table tr:first-child td:last-child {
+    border-top-right-radius: 10px;
+}
+
+table tr:first-child td:first-child {
+    border-top-left-radius: 10px;
+}
+
 
 .styled-table tbody td {
     background-color: var(--terciary-color);
 }
 
-.styled-table tbody td:last-child {
-    border-bottom-right-radius: 8px;
 
-}
 
 .styled-table tbody tr:nth-of-type(even) {
     background-color: var(--quaternary-color);
