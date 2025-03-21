@@ -166,6 +166,7 @@ export default defineComponent({
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 9999;
 }
 
 .modal-content {
@@ -228,6 +229,7 @@ export default defineComponent({
 .profile-item input[type='radio'] {
     margin-right: 10px;
     accent-color: rgba(127, 67, 255, 1);
+    transform: scale(1.4);
 }
 
 .modal-buttons {
