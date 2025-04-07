@@ -1,61 +1,103 @@
-# convicti-front
+# 🚀 Conectando a API Laravel e Configuração do Frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+## _`— Desenvolvido e documentado por Henrique Bisneto —`_
 
-## Recommended IDE Setup
+---
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+### 📌 Configuração inicial
 
-## Type Support for `.vue` Imports in TS
+1. **Conecte a API Laravel** e, logo após, siga as instruções abaixo para configurar o ambiente corretamente.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+2. **Configure as variáveis de ambiente** com as Secrets do OAuth 2.0 da API. Utilize o arquivo `.env` conforme o modelo abaixo:
+```.env
+   VITE_APP_API_BASE_URL=http://localhost:8080
+   VITE_APP_CLIENT_ID=Exemplo: [9e790fd6-cd5b-444f-8b1d-2eec61d5af25]
+   VITE_APP_CLIENT_SECRET=Exemplo: [lSK6TbhZ7d8yKcZRwN0c5EaigvCEOsiObdc5rqDe]
+```
+---
 
-## Customize configuration
+Certifique-se de desabilitar o CORS para o Laravel 11:
+`php artisan config:publish cors` vai gerar um arquivo `cors.php ` e em seguida adicione `'*'` no fnal de paths
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+```php
+<?php
 
-## Project Setup
+return [
 
-```sh
-npm install
+    /*
+  ADICIONE O ASTERISCO DENTRO DA ASPAS SIMPLES NO FINAL DE PATHS PARA PERMITIR AS REQUISIÇÕES
+    */
+
+    'paths' => ['api/*', 'sanctum/csrf-cookie', '*'],
+
+    'allowed_methods' => ['*'],
+
+    'allowed_origins' => ['*'],
+
+    'allowed_origins_patterns' => [],
+
+    'allowed_headers' => ['*'],
+
+    'exposed_headers' => [],
+
+    'max_age' => 0,
+
+    'supports_credentials' => false,
+
+];
 ```
 
-### Compile and Hot-Reload for Development
+### 📦 Instalando as dependências
 
-```sh
-npm run dev
-```
+Execute o seguinte comando para instalar todas as dependências do projeto:
 
-### Type-Check, Compile and Minify for Production
+   npm install
 
-```sh
-npm run build
-```
+---
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+### 🚀 Iniciando o projeto
 
-```sh
-npm run test:unit
-```
+Para rodar o ambiente de desenvolvimento, utilize:
 
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
+   npm run dev
 
-```sh
-npm run test:e2e:dev
-```
+---
 
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
+### ✅ Configuração recomendada do IDE
 
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
+Para melhor experiência de desenvolvimento, utilize:
 
-```sh
-npm run build
-npm run test:e2e
-```
+- VSCode (https://code.visualstudio.com/) com a extensão Volar (https://marketplace.visualstudio.com/items?itemName=Vue.volar) (desative o Vetur se estiver ativado).
 
-### Lint with [ESLint](https://eslint.org/)
+---
 
-```sh
-npm run lint
-```
+### 🔧 Configuração personalizada
+
+Veja a Referência de Configuração do Vite (https://vite.dev/config/) para ajustes adicionais.
+
+---
+
+### 🛠️ Comandos adicionais
+
+**Compilar e otimizar para produção:**
+
+   npm run build
+
+**Executar testes unitários com Vitest (https://vitest.dev/):**
+
+   npm run test:unit
+
+**Executar testes end-to-end com Cypress (https://www.cypress.io/):**
+
+   npm run test:e2e:dev
+
+**Lint do código com ESLint (https://eslint.org/):**
+
+   npm run lint
+
+Agora, o projeto estará pronto para ser acessado! 🎉
+
+---
+
+✅ **Tudo pronto!** Se precisar de ajuda, sinta-se à vontade para entrar em contato. 🚀
+
