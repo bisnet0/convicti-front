@@ -24,11 +24,12 @@
                     <td>{{ user.name }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.profile?.name || 'Sem Perfil' }}</td>
-                    <td>
+                    <td class="status-field">
                         <span :class="user.active ? 'status-active' : 'status-inactive'">
                             {{ user.active ? 'Ativo' : 'Inativo' }}
                         </span>
                     </td>
+
                     <td>
                         <button class="edit-profile-button" @click="openEditModal(user)">
                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
@@ -128,6 +129,37 @@ export default defineComponent({
     padding: 20px;
     margin-top: 20px;
 }
+
+/* Estilo para o status 'Ativo' */
+.status-active {
+    background-color: #CCFFE3;
+    width: 84px;
+    color: #006737;
+    padding: 5px 10px;
+    border-radius: 4px;
+    /* Bordas arredondadas */
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Estilo para o status 'Inativo' */
+.status-inactive {
+    background-color: red;
+    width: 84px;
+    color: rgba(255, 0, 0, 0.349);
+    padding: 5px 10px;
+    border-radius: 4px;
+    /* Bordas arredondadas */
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Ensure the status field has a fixed width */
+.styled-table td.status-field {
+    width: 84px;
+    /* Fixed width for the status column */
+}
+
 
 .styled-table {
     border-collapse: collapse;
